@@ -7,11 +7,6 @@ google_api = os.environ.get("GEMINI_API_KEY")
 
 llm = genai.Client(api_key=google_api)
 
-response = llm.models.generate_content(
-    model = "gemini-2.0-flash-001",
-    contents= "what is 2+1"
-)
-
 def get_prompt_tokens(response):
     return response.usage_metadata.prompt_token_count
 

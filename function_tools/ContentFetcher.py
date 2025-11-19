@@ -2,7 +2,7 @@ import os
 
 MAX_CHARS = 10000   # Limit the number of characters returned from the file
 
-def get_file_content(working_directory, file_path):
+def Content_Fetcher(working_directory, file_path):
     # Convert paths to absolute paths
     abs_working_dir = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
@@ -31,4 +31,4 @@ def get_file_content(working_directory, file_path):
     return file_content_string
 
 
-#print(get_file_content(r"E:\-BugX", r"app.py"))
+#print(Content_Fetcher(r"E:\-BugX", r"app.py"))

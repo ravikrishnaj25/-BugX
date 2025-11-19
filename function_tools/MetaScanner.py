@@ -1,6 +1,6 @@
 import os
 
-def get_files_info(working_directory, directory=None):
+def Meta_Scanner(working_directory, directory=None):
     # Convert working directory to absolute
     abs_working_dir = os.path.abspath(working_directory)
 
@@ -36,7 +36,7 @@ def get_files_info(working_directory, directory=None):
 
     return final_response
 
-#print(get_files_info("E:\-BugX"))
+#print(Meta_Scanner("E:\-BugX"))
 
 
 """

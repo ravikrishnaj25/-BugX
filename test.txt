@@ -1,0 +1,11 @@
+A Command Line Interface (CLI) is a text-based interface used to interact with a computer's operating system or software. Unlike a Graphical User Interface (GUI), which relies on visual elements like icons and menus, a CLI requires users to type commands as lines of text into a terminal or console. 
+Key characteristics of a CLI:
+Text-based interaction: Users input commands and receive output entirely in text format.
+Precision and control: CLIs offer a high degree of control over system operations and program execution, making them favored by developers, system administrators, and advanced users.
+Efficiency for repetitive tasks: Commands can be combined and scripted for automation, significantly speeding up repetitive tasks.
+Accessibility: CLIs are built into most operating systems (e.g., Command Prompt/PowerShell in Windows, Terminal in macOS and Linux).
+Requires knowledge of syntax: Users need to learn specific commands and their syntax to effectively interact with the system.
+Examples of CLI environments:
+Windows: Command Prompt, PowerShell
+macOS: Terminal (which typically uses Bash or Zsh shells)
+Linux: Various shells like Bash, Zsh, Fish

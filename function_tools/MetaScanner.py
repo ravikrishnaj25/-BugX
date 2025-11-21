@@ -1,4 +1,6 @@
 import os
+from google.genai import types
+
 
 def Meta_Scanner(working_directory, directory=None):
     # Convert working directory to absolute
@@ -38,6 +40,19 @@ def Meta_Scanner(working_directory, directory=None):
 
 #print(Meta_Scanner("E:\-BugX"))
 
+schema_meta_scanner = types.FunctionDeclaration(
+    name="Meta_Scanner",
+    description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "directory": types.Schema(
+                type=types.Type.STRING,
+                description="The directory to list files from, relative to the working directory. If not provided, lists files in the working directory itself.",
+            ),
+        },
+    ),
+)
 
 """
 

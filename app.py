@@ -2,6 +2,8 @@
 from config import llm, get_prompt_tokens, get_response_tokens
 import sys
 from google.genai import types
+from prompts import system_prompt
+from function_tools.MetaScanner import schema_meta_scanner
 
 # sys.argv - variable in a list of strings representing all the command line arguments passed to the string
 # sys.argv[0] = file name(goblin.py)
@@ -39,11 +41,23 @@ def bugx():
         types.Content(role="user", parts = [types.Part(text=prompt)]),
         ] # used to store the previous user messages in the history
 
+    tools = types.Tool(
+    function_declarations=[
+        schema_meta_scanner,
+    ]
+)
 
     response = llm.models.generate_content(
         model = "gemini-2.0-flash-001",
-        contents= messages
-    )
+        contents= messages,
+        config=types.GenerateContentConfig(
+                        tools=[tools], system_instruction=system_prompt
+)
+)
+    
+
+    
+    
 
     print(response.text)
 

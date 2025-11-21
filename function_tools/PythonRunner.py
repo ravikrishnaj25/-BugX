@@ -2,24 +2,22 @@ import os
 import subprocess
 
 def run_python_file(working_directory: str, file_path: str):
-    # Convert paths to absolute paths
     abs_working_dir = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
 
-    # Validate: file must be inside working directory
+    # Validate location
     if not abs_file_path.startswith(abs_working_dir):
         return f"Error: '{file_path}' is not in the working directory"
 
-    # Validate: file must exist
+    # Validate file exists
     if not os.path.isfile(abs_file_path):
         return f"Error: '{file_path}' is not a file"
 
-    # Validate: file must be .py
+    # Validate Python file
     if not file_path.endswith(".py"):
         return f"Error: '{file_path}' is not a Python file."
 
     try:
-        # Execute the Python file
         output = subprocess.run(
             ["python3", abs_file_path],
             cwd=abs_working_dir,
@@ -27,7 +25,24 @@ def run_python_file(working_directory: str, file_path: str):
             capture_output=True,
             text=True
         )
-        return output
+
+        # Create formatted output string
+        final_string = f"""
+            STDOUT:
+            {output.stdout}
+            STDERR:
+            {output.stderr}
+            """
+
+        # Handle no output
+        if output.stdout == "" and output.stderr == "":
+            final_string = "No output produced.\n"
+
+        # Append return code if non-zero
+        if output.returncode != 0:
+            final_string += f"Process exited with code {output.returncode}\n"
+
+        return final_string
 
     except Exception as e:
         return f"Error: executing Python file: {e}"

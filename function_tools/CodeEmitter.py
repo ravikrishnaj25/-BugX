@@ -31,7 +31,7 @@ def Code_Emitter(working_directory, file_path, content):
     except Exception as e:
         return f'Failed to write to file "{file_path}": {e}'
 
-print(Code_Emitter(r"E:\-BugX", r"test.txt","Hello I am Ravikrishna"))
+#print(Code_Emitter(r"E:\-BugX", r"test.txt","Hello I am Ravikrishna"))
 
 
 schema_code_emitter = types.FunctionDeclaration(

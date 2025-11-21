@@ -2,17 +2,22 @@
 from config import llm, get_prompt_tokens, get_response_tokens
 import sys
 from google.genai import types
+import function_call
 from prompts import system_prompt
 from function_tools.MetaScanner import schema_meta_scanner
 from function_tools.CodeEmitter import schema_code_emitter
 from function_tools.PythonRunner import schema_python_runner
 from function_tools.ContentFetcher import schema_content_fetcher
+from function_call import call_function
+import os
 
 # sys.argv - variable in a list of strings representing all the command line arguments passed to the string
 # sys.argv[0] = file name(goblin.py)
 
 
 def bugx():
+
+    #working_dir = "E:\-BugX"
     
     verbose_flag = False   
 
@@ -33,7 +38,7 @@ def bugx():
         sys.exit(1)
         return
 
-    if len(sys.argv) == 3 and sys.arg[2] == "--verbose":
+    if len(sys.argv) == 3 and sys.argv[2] == "--verbose":
         verbose_flag = True
 
 
@@ -77,10 +82,8 @@ def bugx():
     if response.function_calls:
         print(response.function_calls)
         for function_call_part in response.function_calls:
-            print(
-                f"Calling function: {function_call_part.name}("
-                f"{function_call_part.arguments})"
-            )
+            result = call_function(os.getcwd(), function_call_part)
+            print(result)
     else:
         # No function calls — print normal text response
         print(response.text)

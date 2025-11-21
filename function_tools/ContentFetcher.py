@@ -12,12 +12,12 @@ def Content_Fetcher(working_directory, file_path):
     # --- SAFETY CHECK 1 ---
     # Make sure the file is inside the working directory
     if not abs_file_path.startswith(abs_working_dir):
-        return f'Error: "{file_path}" is not in the working directory'
+        return {"result": f'Error: "{file_path}" is not in the working directory'}
 
     # --- SAFETY CHECK 2 ---
     # Check if the path is actually a file
     if not os.path.isfile(abs_file_path):
-        return f'Error: "{file_path}" is not a file'
+        return {"result": f'Error: "{file_path}" is not a file'}
 
     # Read the file
     file_content_string = ""
@@ -30,7 +30,7 @@ def Content_Fetcher(working_directory, file_path):
                 f'\n[...File "{file_path}" truncated at {MAX_CHARS} characters]'
             )
 
-    return file_content_string
+    return {"result": file_content_string}
 
 
 #print(Content_Fetcher(r"E:\-BugX", r"app.py"))

@@ -18,7 +18,25 @@ import os
 def bugx():
 
     #working_dir = "E:\-BugX"
+    CYAN = "\033[96m"
+    RESET = "\033[0m"
+
     
+
+    print(CYAN + r"""
+        --[[
+    __________ ____ ___  ____________  ___
+    \______   \    |   \/  _____/\   \/  /
+    |    |  _/    |   /   \  ___ \     / 
+    |    |   \    |  /\    \_\  \/     \ 
+    |______  /______/  \______  /___/\  \
+            \/                 \/      \_/
+    --]]
+    ========================================
+              BUGX 🔻 Coding Agent
+    ========================================
+    """ + RESET)
+        
     verbose_flag = False   
 
 
@@ -55,8 +73,11 @@ def bugx():
     ]
     )
 
+   
+
     response = llm.models.generate_content(
         model = "gemini-2.0-flash-001",
+
         contents= messages,
         config=types.GenerateContentConfig(
                         tools=[tools], system_instruction=system_prompt)
@@ -72,20 +93,34 @@ def bugx():
         print()
         print(CYAN + "====================================================" + RESET)
 
-       
+    
         return 
 
     if verbose_flag:
         print(get_prompt_tokens(response))
         print(get_response_tokens(response))
 
+
+    if response.candidates:
+        for candidate in response.candidates:
+
+            if candidate is None or candidate.content is None:
+                continue
+
+            # Append the model's message content
+            messages.append(candidate.content)
+
+
     if response.function_calls:
         print(response.function_calls)
         for function_call_part in response.function_calls:
             result = call_function(os.getcwd(), function_call_part)
+            messages.append(result)
             print(result)
     else:
         # No function calls — print normal text response
         print(response.text)
 
 bugx()
+
+

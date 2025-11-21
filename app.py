@@ -4,6 +4,9 @@ import sys
 from google.genai import types
 from prompts import system_prompt
 from function_tools.MetaScanner import schema_meta_scanner
+from function_tools.CodeEmitter import schema_code_emitter
+from function_tools.PythonRunner import schema_python_runner
+from function_tools.ContentFetcher import schema_content_fetcher
 
 # sys.argv - variable in a list of strings representing all the command line arguments passed to the string
 # sys.argv[0] = file name(goblin.py)
@@ -43,23 +46,19 @@ def bugx():
 
     tools = types.Tool(
     function_declarations=[
-        schema_meta_scanner,
+        schema_meta_scanner,schema_code_emitter,schema_python_runner,schema_content_fetcher
     ]
-)
+    )
 
     response = llm.models.generate_content(
         model = "gemini-2.0-flash-001",
         contents= messages,
         config=types.GenerateContentConfig(
-                        tools=[tools], system_instruction=system_prompt
-)
-)
+                        tools=[tools], system_instruction=system_prompt)
+    )
     
 
-    
-    
-
-    print(response.text)
+    #print(response.text)
 
     if response is None or response.usage_metadata is None:
         print(CYAN + "====================================================" + RESET)
@@ -74,5 +73,16 @@ def bugx():
     if verbose_flag:
         print(get_prompt_tokens(response))
         print(get_response_tokens(response))
+
+    if response.function_calls:
+        print(response.function_calls)
+        for function_call_part in response.function_calls:
+            print(
+                f"Calling function: {function_call_part.name}("
+                f"{function_call_part.arguments})"
+            )
+    else:
+        # No function calls — print normal text response
+        print(response.text)
 
 bugx()

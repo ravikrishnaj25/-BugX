@@ -1,4 +1,6 @@
 import os
+from google.genai import types
+
 
 def Code_Emitter(working_directory, file_path, content):
     # Convert to absolute paths
@@ -30,3 +32,23 @@ def Code_Emitter(working_directory, file_path, content):
         return f'Failed to write to file "{file_path}": {e}'
 
 print(Code_Emitter(r"E:\-BugX", r"test.txt","Hello I am Ravikrishna"))
+
+
+schema_code_emitter = types.FunctionDeclaration(
+    name="Code_Emitter",
+    description="Writes a file inside the working directory safely.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Relative path of the file to write inside the working directory."
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Text content to write into the file."
+            ),
+        },
+        required=["file_path", "content"]
+    ),
+)

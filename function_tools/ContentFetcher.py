@@ -1,4 +1,6 @@
 import os
+from google.genai import types
+
 
 MAX_CHARS = 10000   # Limit the number of characters returned from the file
 
@@ -32,3 +34,18 @@ def Content_Fetcher(working_directory, file_path):
 
 
 #print(Content_Fetcher(r"E:\-BugX", r"app.py"))
+
+schema_content_fetcher = types.FunctionDeclaration(
+    name="Content_Fetcher",
+    description="Reads content from a file inside the working directory, truncated to MAX_CHARS.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Relative path of the file to read."
+            ),
+        },
+        required=["file_path"]
+    ),
+)

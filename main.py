@@ -16,14 +16,14 @@ def print_banner():
     RESET = "\033[0m"
 
     print(CYAN + r"""
-        --[[
+        
     __________ ____ ___  ____________  ___
     \______   \    |   \/  _____/\   \/  /
     |    |  _/    |   /   \  ___ \     / 
     |    |   \    |  /\    \_\  \/     \ 
     |______  /______/  \______  /___/\  \
             \/                 \/      \_/
-    --]]
+    
     ========================================
               BUGX 🐞 Coding Agent
     ========================================
@@ -78,18 +78,21 @@ def bugx():
     BLUE = "\033[94m"
     RESET = "\033[0m"
 
-    while True:
-        print("\n")
-        print(CYAN + "╭──────────────────────────────────────────╮" + RESET)
-        print(CYAN + "│                🐞 BUGX MENU              │" + RESET)
-        print(CYAN + "├──────────────────────────────────────────┤" + RESET)
-        print(f"│ 1. {GREEN}Ask BUGX a question (LLM mode){RESET}")
-        print(f"│ 2. {YELLOW}Change working directory{RESET}")
-        print(f"│ 3. {BLUE}Show current working directory{RESET}")
-        print(f"│ 4. {RED}Exit BUGX (cry silently){RESET}")
-        print(CYAN + "╰──────────────────────────────────────────╯" + RESET)
+    # 🔥 Print menu only once
+    print("\n")
+    print(CYAN + "╭──────────────────────────────────────────╮" + RESET)
+    print(CYAN + "│                🐞 BUGX MENU              │" + RESET)
+    print(CYAN + "├──────────────────────────────────────────┤" + RESET)
+    print(f"│ 1. {GREEN}Ask BUGX (LLM mode){RESET}")
+    print(f"│ 2. {YELLOW}Change working directory{RESET}")
+    print(f"│ 3. {BLUE}Show current working directory{RESET}")
+    print(f"│ 4. {RED}Exit BUGX (cry silently){RESET}")
+    print(CYAN + "╰──────────────────────────────────────────╯" + RESET)
 
-        choice = input(GREEN + "✨ Choose your destiny: " + RESET).strip()
+    # 🔁 Loop only the input prompt
+    while True:
+
+        choice = input(GREEN + " Choose your destiny: " + RESET).strip()
 
         if choice == "1":
             print("\n" + CYAN + "💬 Chat mode activated. Spill your bugs..." + RESET)
@@ -112,12 +115,10 @@ def bugx():
 
         elif choice == "4":
             print("\n" + RED + "👋 Exiting BUGX... Deleting 0 bugs and 1000 hopes." + RESET)
-            print(YELLOW + "✨ See ya, code warrior!" + RESET)
+            print(YELLOW + " See ya, code warrior!" + RESET)
             break
 
         else:
             print(RED + "⚠️ Invalid choice. Even BUGX can't debug this input." + RESET)
-
-
 
 bugx()

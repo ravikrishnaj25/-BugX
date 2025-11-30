@@ -6,8 +6,9 @@ import re
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
+from langchain.tools import tool
 from config import google_api
+from services.helper import parse_response
 
 
 
@@ -106,49 +107,27 @@ def execute(user_prompt: str) -> str:
     return chain.invoke({"user_prompt": user_prompt})
 
 
-# --- Function to parse response ---
-def parse_response(response: str):
-    result = {
-        "project": "",
-        "reply": "",
-        "focus": "",
-        "plans": {},
-        "summary": ""
-    }
 
-    current_section = None
-    current_step = None
 
-    for line in response.split("\n"):
-        line = line.strip()
 
-        if line.startswith("Plan:"):
-            current_section = "plans"
-        elif line.startswith("Summary:"):
-            current_section = "summary"
-            result["summary"] = line.split(":", 1)[1].strip()
-        elif current_section == "reply":
-            result["reply"] += " " + line
-        elif current_section == "focus":
-            result["focus"] += " " + line
-        elif current_section == "plans":
-            match = re.match(r"(?:- \[ \] )?Step\s*(\d+):\s*(.*)", line)
-            if match:
-                current_step = int(match.group(1))
-                step_text = match.group(2).strip()
-                result["plans"][current_step] = step_text
-            elif current_step:
-                result["plans"][current_step] += " " + line
-        elif current_section == "summary":
-            result["summary"] += " " + line.replace("```", "")
+@tool
+def Plan_Generator(user_prompt: str) -> Dict:
+    """
+    Generate a technical step-by-step software engineering plan using BugX planner.
 
-    # Clean up whitespace
-    for key in result:
-        if isinstance(result[key], str):
-            result[key] = result[key].strip()
+    Args:
+        user_prompt: The user's request (task, bug, feature, project, etc.)
 
-    return result
+    Returns:
+        A dictionary containing:
+            - plans: Ordered step instructions
+            - summary: Final summary of the plan
+    """
+    raw_output = chain.invoke({"user_prompt": user_prompt})
+    return parse_response(raw_output)
 
+
+"""
 
 # --- Run the agent directly ---
 if __name__ == "__main__":
@@ -159,3 +138,5 @@ if __name__ == "__main__":
 
     parsed = parse_response(response)
     print("\nParsed Output:\n", parsed)
+
+"""

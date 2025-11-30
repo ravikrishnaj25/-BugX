@@ -1,8 +1,22 @@
 import os
 from google.genai import types
+from langchain.tools import tool
 
 
-def Code_Emitter(working_directory, file_path, content):
+@tool
+def Code_Emitter(working_directory: str, file_path: str, content: str) -> str:
+    """Safely write content to a file inside the working directory.
+
+    Ensures:
+    - The file path cannot escape the working directory.
+    - Parent directories are created if missing.
+    - File content is written using UTF-8.
+
+    Args:
+        working_directory: Base folder where the file must be created.
+        file_path: Relative path to the target file inside the working directory.
+        content: The text content to write into the file.
+    """
     # Convert to absolute paths
     abs_working_dir = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
@@ -31,9 +45,10 @@ def Code_Emitter(working_directory, file_path, content):
     except Exception as e:
         return f'Failed to write to file "{file_path}": {e}'
 
+
 #print(Code_Emitter(r"E:\-BugX", r"test.txt","Hello I am Ravikrishna"))
 
-
+"""
 schema_code_emitter = types.FunctionDeclaration(
     name="Code_Emitter",
     description="Writes a file inside the working directory safely.",
@@ -52,3 +67,4 @@ schema_code_emitter = types.FunctionDeclaration(
         required=["file_path", "content"]
     ),
 )
+"""

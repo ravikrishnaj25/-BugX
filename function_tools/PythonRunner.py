@@ -1,9 +1,24 @@
 import os
 import subprocess
 from google.genai import types
+from langchain.tools import tool
 
 
-def run_python_file(working_directory: str, file_path: str):
+
+@tool
+def run_python_file(working_directory: str, file_path: str) -> str:
+    """Execute a Python file located inside the working directory.
+
+    Ensures:
+    - The file stays within the working directory.
+    - The target is an existing `.py` file.
+    - Execution time is limited to 30 seconds.
+    - STDOUT and STDERR are captured and returned.
+
+    Args:
+        working_directory: Base directory where the file exists.
+        file_path: Relative path to the Python file to execute.
+    """
     abs_working_dir = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
 
@@ -28,7 +43,7 @@ def run_python_file(working_directory: str, file_path: str):
             text=True
         )
 
-        # Create formatted output string
+        # Construct return message
         final_string = f"""
             STDOUT:
             {output.stdout}
@@ -36,20 +51,20 @@ def run_python_file(working_directory: str, file_path: str):
             {output.stderr}
             """
 
-        # Handle no output
-        if output.stdout == "" and output.stderr == "":
+        # No output
+        if output.stdout.strip() == "" and output.stderr.strip() == "":
             final_string = "No output produced.\n"
 
-        # Append return code if non-zero
+        # Non-zero return code
         if output.returncode != 0:
             final_string += f"Process exited with code {output.returncode}\n"
 
         return final_string
 
     except Exception as e:
-        return f"Error: executing Python file: {e}"
+        return f"Error executing Python file: {e}"
 
-
+"""
 schema_python_runner = types.FunctionDeclaration(
     name="run_python_file",
     description="Executes a Python file inside the working directory and returns its output.",
@@ -64,3 +79,4 @@ schema_python_runner = types.FunctionDeclaration(
         required=["file_path"]
     ),
 )
+"""

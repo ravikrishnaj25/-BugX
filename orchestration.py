@@ -4,6 +4,7 @@ from typing import Any, Dict
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_react_agent, AgentExecutor
+from langchain.callbacks.base import BaseCallbackHandler
 
 # If you already use this pattern in other files:
 from config import google_api
@@ -142,7 +143,21 @@ Question: {input}
 {agent_scratchpad}
 """
 # ================================================================
+class BugXCallback(BaseCallbackHandler):
+    """Callback to print agent's internal reasoning steps & tool outputs."""
 
+    def on_agent_action(self, action, **kwargs):
+        print("\n====================== AGENT ACTION ======================")
+        print("Tool:", action.tool)
+        print("Input:", action.tool_input)
+
+    def on_tool_end(self, output, **kwargs):
+        print("\n======================= TOOL OUTPUT =======================")
+        print(output)
+
+    def on_text(self, text, **kwargs):
+        print("\n======================= AGENT THOUGHT =====================")
+        print(text)
 
 # === BUILD PROMPT, AGENT & EXECUTOR ============================
 prompt = ChatPromptTemplate.from_template(REACT_PROMPT_TEMPLATE)
@@ -166,7 +181,7 @@ BUGX_TOOLS = [
     Test_Runner,
     File_Delete_Move,
 ]
-
+# Build agent
 agent = create_react_agent(
     llm=bugx_llm,
     tools=BUGX_TOOLS,
@@ -178,24 +193,34 @@ bugx_agent = AgentExecutor(
     tools=BUGX_TOOLS,
     verbose=True,
     handle_parsing_errors=True,
-    max_iterations=10,  # safety limit
+    max_iterations=10,
 )
+
+
 # ================================================================
-
-
-# === CONVENIENCE RUN FUNCTION ==================================
-def run_bugx_agent(user_input: str) -> Dict[str, Any]:
+# 🔥 RUNNER FUNCTION WITH CALLBACK (prints full execution)
+# ================================================================
+def run_bugx_agent(user_input: str, working_directory: str = "./") -> Dict[str, Any]:
     """
-    Run the BugX ReAct agent on a single user input.
+    Run the BugX ReAct agent on a single user input and working directory.
 
     Returns the full AgentExecutor result dict.
     The final natural-language answer is in result["output"].
     """
-    return bugx_agent.invoke({"input": user_input})
+    callbacks = [BugXCallback()]
+
+    return bugx_agent.invoke(
+        {
+            "input": user_input,
+            "working_directory": working_directory,
+        },
+        config={"callbacks": callbacks}
+    )
+
 
 
 if __name__ == "__main__":
     # Simple manual test
-    result = run_bugx_agent("Create a small FastAPI app with one /health endpoint and tests.")
+    result = run_bugx_agent("Create a small FastAPI app with one /health endpoint and tests.", working_directory="E:\-BugX\Test_Project")
     print("\n=== FINAL OUTPUT ===")
     print(result["output"])

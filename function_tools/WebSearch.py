@@ -1,40 +1,58 @@
-# Web Search Tool
-# Agent needs research to fix errors & build unfamiliar tasks
+# Web Search Tool (Using DuckDuckGoSearchRun)
+# Compatible with LangChain v0.2–0.3+
 
 from langchain.tools import tool
-from langchain_community.tools.ddg_search import DuckDuckGoSearchResults
+from langchain_community.tools import DuckDuckGoSearchRun
 
 
 @tool
 def Web_Search(query: str, max_results: int = 5) -> list:
     """
-    Perform a free web search using DuckDuckGo.
-
-    Use this tool when the agent needs to:
-    - Research errors
-    - Look up documentation
-    - Find library usage examples
-    - Search for installation instructions
-    - Explore unknown frameworks or APIs
+    Perform a web search using DuckDuckGo.
 
     Args:
         query: Search query string.
-        max_results: Number of results to return (default: 5)
+        max_results: Maximum number of results to return (default: 5)
 
     Returns:
-        A list of search result entries (title, snippet, URL).
+        A list of search result dictionaries:
+        [
+            {
+                "title": "...",
+                "snippet": "...",
+                "url": "..."
+            },
+            ...
+        ]
     """
+
     try:
-        ddg = DuckDuckGoSearchResults()
-        results = ddg.run(query)
+        search = DuckDuckGoSearchRun()
+        raw_results = search.run(query)
 
-        # DuckDuckGo returns a string → convert to list if needed
-        if isinstance(results, str):
-            return [results]
+        # DuckDuckGoSearchRun returns a string → split into lines
+        lines = raw_results.split("\n")
 
-        return results[:max_results]
+        formatted = []
+
+        for line in lines[:max_results]:
+            parts = line.split(" | ")
+
+            # Each line is typically: "Title | Snippet | URL"
+            if len(parts) == 3:
+                title, snippet, url = parts
+            else:
+                title = line
+                snippet = ""
+                url = ""
+
+            formatted.append({
+                "title": title.strip(),
+                "snippet": snippet.strip(),
+                "url": url.strip(),
+            })
+
+        return formatted
 
     except Exception as e:
-        return [f"Error while searching: {e}"]
-
-
+        return [f"Error during web search: {e}"]

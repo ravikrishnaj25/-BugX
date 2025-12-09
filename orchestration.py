@@ -4,7 +4,7 @@ from typing import Any, Dict
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_react_agent, AgentExecutor
-from langchain.callbacks.base import BaseCallbackHandler
+from langchain_core.callbacks import BaseCallbackHandler    # ✔️ valid
 
 # If you already use this pattern in other files:
 from config import google_api
@@ -220,7 +220,9 @@ def run_bugx_agent(user_input: str, working_directory: str = "./") -> Dict[str, 
 
 
 if __name__ == "__main__":
-    # Simple manual test
-    result = run_bugx_agent("Create a small FastAPI app with one /health endpoint and tests.", working_directory="E:\-BugX\Test_Project")
+    result = run_bugx_agent(
+        "Create a small FastAPI app with one /health endpoint and tests.",
+        working_directory=r"E:\-BugX\Test_Project"
+    )
     print("\n=== FINAL OUTPUT ===")
     print(result["output"])

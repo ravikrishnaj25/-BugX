@@ -13,7 +13,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 GOOGLE_API_KEY = google_api
 
 
-code_llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
+code_llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=GOOGLE_API_KEY)
 
 
 # --- SYSTEM PROMPT FOR CODE GENERATION ---

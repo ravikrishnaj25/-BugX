@@ -3,10 +3,12 @@ from typing import Any, Dict
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.agents import create_react_agent, AgentExecutor
-from langchain_core.callbacks import BaseCallbackHandler    # ✔️ valid
+from langchain_core.messages import HumanMessage
+from langchain.agents import tool, create_tool_calling_agent
 
-# If you already use this pattern in other files:
+
+
+# API Key
 from config import google_api
 GOOGLE_API_KEY = google_api
 
@@ -39,7 +41,7 @@ bugx_llm = ChatGoogleGenerativeAI(
 
 
 # === REACT SYSTEM PROMPT ========================================
-REACT_PROMPT_TEMPLATE = """\
+SYSTEM_PROMPT = """\
 You are BugX, an autonomous AI Software Engineer Agent.
 
 You work inside a local project directory and have access to tools
@@ -142,32 +144,36 @@ Begin!
 Question: {input}
 {agent_scratchpad}
 """
-# ================================================================
-class BugXCallback(BaseCallbackHandler):
-    """Callback to print agent's internal reasoning steps & tool outputs."""
+import os
+from typing import Any, Dict
 
-    def on_agent_action(self, action, **kwargs):
-        print("\n====================== AGENT ACTION ======================")
-        print("Tool:", action.tool)
-        print("Input:", action.tool_input)
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage
+from langchain.agents import tool, create_tool_calling_agent
 
-    def on_tool_end(self, output, **kwargs):
-        print("\n======================= TOOL OUTPUT =======================")
-        print(output)
+# API Key
+from config import google_api
+GOOGLE_API_KEY = google_api
 
-    def on_text(self, text, **kwargs):
-        print("\n======================= AGENT THOUGHT =====================")
-        print(text)
 
-# === BUILD PROMPT, AGENT & EXECUTOR ============================
-prompt = ChatPromptTemplate.from_template(REACT_PROMPT_TEMPLATE)
-# ReAct prompt needs these extra variables
-if "tools" not in prompt.input_variables:
-    prompt.input_variables.append("tools")
-if "tool_names" not in prompt.input_variables:
-    prompt.input_variables.append("tool_names")
 
-# List of all tools you want the agent to use
+
+
+# === LLM (Gemini) ==========================================================
+
+bugx_llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash",
+    google_api_key=GOOGLE_API_KEY,
+    temperature=0.1,
+)
+# ===========================================================================
+
+
+
+
+# === BUILD TOOL LIST =======================================================
+
 BUGX_TOOLS = [
     Plan_Generator,
     Web_Search,
@@ -181,42 +187,37 @@ BUGX_TOOLS = [
     Test_Runner,
     File_Delete_Move,
 ]
-# Build agent
-agent = create_react_agent(
+# ===========================================================================
+
+
+# === CREATE AGENT (LangChain 1.1.3 API) ====================================
+
+prompt = ChatPromptTemplate.from_template(SYSTEM_PROMPT)
+
+agent = create_tool_calling_agent(
     llm=bugx_llm,
     tools=BUGX_TOOLS,
     prompt=prompt,
 )
-
-bugx_agent = AgentExecutor(
-    agent=agent,
-    tools=BUGX_TOOLS,
-    verbose=True,
-    handle_parsing_errors=True,
-    max_iterations=10,
-)
+# ===========================================================================
 
 
-# ================================================================
-# 🔥 RUNNER FUNCTION WITH CALLBACK (prints full execution)
-# ================================================================
+# === RUNNER FUNCTION (clean output) ========================================
+
 def run_bugx_agent(user_input: str, working_directory: str = "./") -> Dict[str, Any]:
     """
-    Run the BugX ReAct agent on a single user input and working directory.
-
-    Returns the full AgentExecutor result dict.
-    The final natural-language answer is in result["output"].
+    Runs the BugX agent silently (no trace logs).
+    Returns the final natural-language answer.
     """
-    callbacks = [BugXCallback()]
 
-    return bugx_agent.invoke(
-        {
-            "input": user_input,
-            "working_directory": working_directory,
-        },
-        config={"callbacks": callbacks}
-    )
+    result = agent.invoke({
+        "messages": [HumanMessage(content=user_input)],
+        "working_directory": working_directory
+    })
 
+    final_output = result["messages"][-1].content
+    return {"output": final_output}
+# ===========================================================================
 
 
 if __name__ == "__main__":
@@ -224,5 +225,6 @@ if __name__ == "__main__":
         "Create a small FastAPI app with one /health endpoint and tests.",
         working_directory=r"E:\-BugX\Test_Project"
     )
+
     print("\n=== FINAL OUTPUT ===")
     print(result["output"])

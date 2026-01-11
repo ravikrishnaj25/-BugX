@@ -1,8 +1,10 @@
 # BugX
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![Status](https://img.shields.io/badge/status-active-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-Framework-0A0A0A?style=for-the-badge)
+![Google GenAI](https://img.shields.io/badge/Google%20GenAI-1.12.1-4285F4?style=for-the-badge&logo=google)
+![dotenv](https://img.shields.io/badge/python--dotenv-1.1.0-2ECC71?style=for-the-badge)
+
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/placeholder/bugx-banner.png" alt="BugX Banner" width="600"/>
@@ -91,3 +93,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+

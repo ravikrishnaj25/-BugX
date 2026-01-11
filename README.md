@@ -3,7 +3,19 @@
 ![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![LangChain](https://img.shields.io/badge/LangChain-Framework-0A0A0A?style=for-the-badge)
 ![Google GenAI](https://img.shields.io/badge/Google%20GenAI-1.12.1-4285F4?style=for-the-badge&logo=google)
-![dotenv](https://img.shields.io/badge/python--dotenv-1.1.0-2ECC71?style=for-the-badge)
+
+![Code Emitter](https://img.shields.io/badge/Agent-Code%20Emitter-6C5CE7?style=for-the-badge)
+![Content Fetcher](https://img.shields.io/badge/Agent-Content%20Fetcher-00C7B7?style=for-the-badge)
+![Meta Scanner](https://img.shields.io/badge/Agent-Meta%20Scanner-FF9F43?style=for-the-badge)
+![Python Runner](https://img.shields.io/badge/Agent-Python%20Runner-1E90FF?style=for-the-badge)
+![File Creator](https://img.shields.io/badge/Agent-File%20Creator-27AE60?style=for-the-badge)
+![Shell Handler](https://img.shields.io/badge/Agent-Shell%20Handler-34495E?style=for-the-badge)
+![Refactor Tool](https://img.shields.io/badge/Agent-Refactor%20Tool-E84393?style=for-the-badge)
+![Validator](https://img.shields.io/badge/Agent-Validator-F1C40F?style=for-the-badge)
+![Web Search](https://img.shields.io/badge/Agent-Web%20Search-2980B9?style=for-the-badge)
+![Planner](https://img.shields.io/badge/Agent-Planner-8E44AD?style=for-the-badge)
+![Code Generator](https://img.shields.io/badge/Agent-Code%20Generator-16A085?style=for-the-badge)
+
 
 
 <p align="center">
@@ -93,4 +105,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+
 

@@ -113,13 +113,8 @@ Contributions are welcome! Please open issues and submit pull requests for impro
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
----
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/placeholder/bugx-footer.png" alt="BugX Footer" width="200"/>
-</p>
 
-<!-- Replace image URLs with your own screenshots or banners -->
 
 
 

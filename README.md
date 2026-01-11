@@ -6,16 +6,14 @@
   <img src="https://img.shields.io/badge/Google%20GenAI-1.12.1-4285F4?style=for-the-badge&logo=google"/>
 </p>
 
-
-
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/placeholder/bugx-banner.png" alt="BugX Banner" width="600"/>
-</p>
-
 <h1 align="center"> 🚀 Overview</h1>
 
 **BugX** is a modular Python orchestrator designed to automate code generation, refactoring, validation, and more. It leverages a suite of tools to streamline development workflows, making it ideal for rapid prototyping and intelligent automation.
+
+
+<p align="center">
+  <img src="1.jpeg" alt="BugX Banner" width="600"/>
+</p>
 
 ---
 
@@ -71,8 +69,8 @@
 <h1 align="center"> 🖼️ Screenshots</h1>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/placeholder/bugx-screenshot1.png" alt="BugX Screenshot 1" width="400"/>
-  <img src="https://user-images.githubusercontent.com/placeholder/bugx-screenshot2.png" alt="BugX Screenshot 2" width="400"/>
+  <img src="2.jpeg" alt="BugX Screenshot 1" width="400"/>
+  <img src="3.jpeg" alt="BugX Screenshot 2" width="400"/>
 </p>
 
 ---
@@ -119,6 +117,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+
 
 
 

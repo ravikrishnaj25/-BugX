@@ -1,5 +1,5 @@
 <p align="center">
-# BugX
+<h1>BugX</h1>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
@@ -112,6 +112,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+
 
 
 

@@ -1,6 +1,5 @@
-<p align="center">
-<h1>BugX</h1>
-</p>
+<h1 align="center">BugX</h1>
+
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8%2B-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/LangChain-Framework-0A0A0A?style=for-the-badge"/>
@@ -14,13 +13,13 @@
   <img src="https://user-images.githubusercontent.com/placeholder/bugx-banner.png" alt="BugX Banner" width="600"/>
 </p>
 
-## 🚀 Overview
+<h1 align="center"> 🚀 Overview</h1>
 
 **BugX** is a modular Python orchestrator designed to automate code generation, refactoring, validation, and more. It leverages a suite of tools to streamline development workflows, making it ideal for rapid prototyping and intelligent automation.
 
 ---
 
-## 🛠️ Features
+<h1 align="center"> 🛠️ Features</h1>
 
 - **Code Generation & Emission**: Generate and emit Python code dynamically.
 - **Content Fetching**: Integrate web search and content fetching for context-aware development.
@@ -31,7 +30,8 @@
 
 ---
 
-## Agents Used
+<h1 align="center"> Agents Used</h1>
+
 <p align="center">
 
   <img src="https://img.shields.io/badge/Agent-Code%20Emitter-6C5CE7?style=for-the-badge"/>
@@ -46,7 +46,9 @@
   <img src="https://img.shields.io/badge/Agent-Planner-8E44AD?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Agent-Code%20Generator-16A085?style=for-the-badge"/>
 </p>
-## 📂 Project Structure
+
+
+<h1 align="center"> 📂 Project Structure</h1>
 
 ```
 .
@@ -65,7 +67,8 @@
 
 ---
 
-## 🖼️ Screenshots
+
+<h1 align="center"> 🖼️ Screenshots</h1>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/placeholder/bugx-screenshot1.png" alt="BugX Screenshot 1" width="400"/>
@@ -74,7 +77,8 @@
 
 ---
 
-## 📦 Installation
+
+<h1 align="center"> 📦 Installation</h1>
 
 ```bash
 # Clone the repository
@@ -87,7 +91,8 @@ $ pip install -r requirements.txt
 
 ---
 
-## 🚦 Usage
+
+<h1 align="center"> 🚦 Usage</h1>
 
 ```bash
 python orchestrator.py
@@ -95,13 +100,15 @@ python orchestrator.py
 
 ---
 
-## 🤝 Contributing
+
+<h1 align="center"> 🤝 Contributing</h1>
 
 Contributions are welcome! Please open issues and submit pull requests for improvements.
 
 ---
 
-## 📄 License
+## 
+<h1 align="center"> 📄 License</h1>
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
@@ -112,6 +119,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+
 
 
 

@@ -12,7 +12,7 @@
 
 
 <p align="center">
-  <img src="2.jpeg" alt="BugX Banner" width="700"/>
+  <img src="2.jpeg" alt="BugX Banner" width="800"/>
 </p>
 
 ---
@@ -69,11 +69,11 @@
 <h1 align="center"> 🖼️ Screenshots</h1>
 
 <p align="center">
-  <img src="2.jpeg" alt="BugX Screenshot 1" width="600"/>
+  <img src="1.jpeg" alt="BugX Screenshot 1" width="900"/>
 </p>
 
 <p align="center">
-  <img src="3.jpeg" alt="BugX Screenshot 2" width="600"/>
+  <img src="3.jpeg" alt="BugX Screenshot 2" width="900"/>
 </p>
 
 ---
@@ -120,6 +120,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 </p>
 
 <!-- Replace image URLs with your own screenshots or banners -->
+
 
 
 

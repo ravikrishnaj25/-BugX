@@ -66,7 +66,6 @@
 ---
 
 
-<h1 align="center"> 🖼️ Screenshots</h1>
 
 <p align="center">
   <img src="1.jpeg" alt="BugX Screenshot 1" width="900"/>
@@ -112,6 +111,7 @@ Contributions are welcome! Please open issues and submit pull requests for impro
 <h1 align="center"> 📄 License</h1>
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 
 
 

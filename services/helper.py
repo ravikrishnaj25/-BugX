@@ -37,8 +37,8 @@ def parse_response(response: str):
             result["summary"] += " " + line.replace("```", "")
 
     # Clean up whitespace
-    for key in result:
-        if isinstance(result[key], str):
-            result[key] = result[key].strip()
+    for i in result:
+        if isinstance(result[i], str):
+            result[i] = result[i].strip()
 
     return result

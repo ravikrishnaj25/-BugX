@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Google%20GenAI-1.12.1-4285F4?style=for-the-badge&logo=google"/>
 </p>
 
-<h1 align="center"> 🚀 Overview</h1>
+<h1 align="center"> Overview</h1>
 
 **BugX** is a modular Python orchestrator designed to automate code generation, refactoring, validation, and more. It leverages a suite of tools to streamline development workflows, making it ideal for rapid prototyping and intelligent automation.
 

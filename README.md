@@ -17,7 +17,7 @@
 
 ---
 
-<h1 align="center"> 🛠️ Features</h1>
+<h1 align="center"> Features</h1>
 
 - **Code Generation & Emission**: Generate and emit Python code dynamically.
 - **Content Fetching**: Integrate web search and content fetching for context-aware development.

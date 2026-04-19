@@ -46,7 +46,7 @@
 </p>
 
 
-<h1 align="center"> 📂 Project Structure</h1>
+<h1 align="center">  Project Structure</h1>
 
 ```
 .
